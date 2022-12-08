@@ -68,7 +68,7 @@ class Category extends BaseController
         } else {
             $ubah = $this->model->db->table('categories')->update($data, ['category_id' => $id]);
             if ($ubah) {
-                session()->setFlashdata('info', 'Updated Category');
+                session()->setFlashdata('info', 'Updated category');
                 return redirect()->to(base_url('category'));
             }
         }
@@ -78,7 +78,7 @@ class Category extends BaseController
     {
         $hapus = $this->model->db->table('categories')->delete(['category_id' => $id]);
         if ($hapus) {
-            session()->setFlashdata('warning', 'Deleted Category Succesfully');
+            session()->setFlashdata('warning', 'Deleted category Succesfully');
             return redirect()->to(base_url('category'));
         }
     }

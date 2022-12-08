@@ -11,7 +11,8 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <script type="text/javascript" id="debugbar_dynamic_script"></script>
   <!-- ini belom ketemu file nya -->
-  <script type="text/javascript" id="debugbar_loader" data-time="1" src="<?php echo base_url('plugins/'); ?>/index.php?debugbar"></script>
+  <script type="text/javascript" id="debugbar_loader" data-time="1"
+    src="<?php echo base_url('plugins/'); ?>/index.php?debugbar"></script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -40,17 +41,18 @@
     <!-- sidebar -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <a href="<?php echo base_url('/'); ?>" class="brand-link">
-        <img src="<?php echo base_url(); ?>/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="<?php echo base_url(); ?>/img/AdminLTELogo.png" alt="AdminLTE Logo"
+          class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">SIP Online</span>
       </a>
 
       <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            <img src="<?php echo base_url(); ?>/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            <img src="<?php echo base_url(); ?>/img/riqqi.jpeg" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">Admin</a>
+            <a href="#" class="d-block">Riqqi</a>
           </div>
         </div>
         <nav class="mt-2">
@@ -106,7 +108,8 @@
       <div class="float-right d-none d-sm-inline">
         Sistem Informasi Penjualan
       </div>
-      <strong>Copyright &copy; 20214-2022 <a href="<?php echo base_url('/'); ?>">SIP Online</a>.</strong> All rights reserved.
+      <strong>Copyright &copy; 20214-2022 <a href="<?php echo base_url('/'); ?>">SIP Online</a>.</strong> All rights
+      reserved.
     </footer>
   </div>
 
