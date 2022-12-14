@@ -11,8 +11,7 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <script type="text/javascript" id="debugbar_dynamic_script"></script>
   <!-- ini belom ketemu file nya -->
-  <script type="text/javascript" id="debugbar_loader" data-time="1"
-    src="<?php echo base_url('plugins/'); ?>/index.php?debugbar"></script>
+  <script type="text/javascript" id="debugbar_loader" data-time="1" src="<?php echo base_url('plugins/'); ?>/index.php?debugbar"></script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -41,8 +40,7 @@
     <!-- sidebar -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <a href="<?php echo base_url('/'); ?>" class="brand-link">
-        <img src="<?php echo base_url(); ?>/img/AdminLTELogo.png" alt="AdminLTE Logo"
-          class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="<?php echo base_url(); ?>/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">SIP Online</span>
       </a>
 
@@ -93,8 +91,25 @@
       </div>
     </aside>
     <!-- end sidebar -->
+    <div class="content-wrapper">
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Products</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active"><?= $title; ?></li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+      <?= $this->renderSection('content') ?>
+    </div>
 
-    <?= $this->renderSection('content') ?>
 
     <!-- footer -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -116,6 +131,21 @@
   <script src="<?php echo base_url('plugins'); ?>/jquery/jquery.min.js"></script>
   <script src="<?php echo base_url('plugins'); ?>/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="<?php echo base_url(); ?>/js/adminlte.min.js"></script>
+  <script>
+    function previewImg() {
+      const gambarUpload = document.querySelector('#gambar-produk');
+      const gambarPreview = document.querySelector('.img-preview');
+      const labelGambar = document.querySelector('.custom-file-label');
+
+      labelGambar.textContent = gambarUpload.files[0].name;
+      const fileGambar = new FileReader();
+      fileGambar.readAsDataURL(gambarUpload.files[0]);
+
+      fileGambar.onload = function(e) {
+        gambarPreview.src = e.target.result;
+      }
+    }
+  </script>
 </body>
 
 </html>

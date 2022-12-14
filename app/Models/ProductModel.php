@@ -25,20 +25,17 @@ class ProductModel extends Model
 
     // Validation
     protected $validationRules      = [
-        'product_id'    => 'required',
         'category_id'    => 'required',
         'product_name'    => 'required',
         'product_price'    => 'required',
         'product_sku'    => 'required',
         'product_status'    => 'required',
         'product_description'    => 'required',
-        'product_image'    => 'uploaded[product_image]|
-                                mime_in[product_image,image/jpeg,image/jpg,image/gif,image/png]|
-                                max_size[product_image,1000]',
+        'product_image'    => 'is_image[product_image]|mime_in[product_image,image/jpeg,image/jpg,image/gif,image/png]|max_size[product_image,1024]',
     ];
     protected $validationMessages   = [
         'category_id'   =>  ['required' => 'nama Category harus diisi'],
-        'product_id'   =>  ['required' => 'nama product harus diisi'],
+        'product_name'   =>  ['required' => 'nama product harus diisi'],
         'product_price'   =>  ['required' => 'harga product harus diisi'],
         'product_sku'   =>  ['required' => 'kode product harus diisi'],
         'product_status'   =>  ['required' => 'status product harus diisi'],
@@ -46,7 +43,6 @@ class ProductModel extends Model
         'product_image'   =>  [
             'mime_in' => 'gambar product hanya boleh diisi oleh file jpeg/jpg/gif/png',
             'max_size' => 'gambar product maksimal 1 mb',
-            'uploaded' => 'gambar product wajib diisi',
         ],
     ];
     protected $skipValidation       = false;

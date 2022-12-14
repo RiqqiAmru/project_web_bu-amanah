@@ -15,14 +15,16 @@ class Category extends BaseController
     public function index()
     {
         $data = [
-            'categories' => $this->model->findAll()
+            'categories' => $this->model->findAll(),
+            'title' => 'Category'
         ];
         return view('category/index', $data);
     }
+
     public function create()
     {
-        # code...
-        return view('category/create');
+        $data = ['title' => 'Create Category'];
+        return view('category/create', $data);
     }
 
     public function store()
@@ -47,7 +49,10 @@ class Category extends BaseController
     }
     public function edit($id)
     {
-        $data['category'] = $this->model->find($id);
+        $data = [
+            'category' =>  $this->model->find($id),
+            'title' => 'Edit Category'
+        ];
         echo view('category/edit', $data);
     }
 
