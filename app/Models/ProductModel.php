@@ -43,6 +43,7 @@ class ProductModel extends Model
         'product_image'   =>  [
             'mime_in' => 'gambar product hanya boleh diisi oleh file jpeg/jpg/gif/png',
             'max_size' => 'gambar product maksimal 1 mb',
+            'uploaded' => 'gambar product wajib diisi',
         ],
     ];
     protected $skipValidation       = false;

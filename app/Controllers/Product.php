@@ -5,6 +5,8 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\CategoriesModel;
 use App\Models\ProductModel;
+use CodeIgniter\Validation\Validation;
+use Config\Validation as ConfigValidation;
 
 class Product extends BaseController
 {
@@ -19,14 +21,24 @@ class Product extends BaseController
 
     public function index()
     {
+        $paginate = 5;
+        $nomor = $this->request->getGet('page_product');
+        if ($nomor = null) {
+            $nomor = 1;
+        }
+
         $data = [
-            'product' => $this->ProductModel->table('products')
-                ->join('categories', 'categories.category_id = products.category_id ')
-                ->where('categories.category_status', 'Active')
-                ->get()
-                ->getResultArray(),
-            'title' => 'Products'
+            // 'product' => $this->ProductModel->table('products')
+            //     ->join('categories', 'categories.category_id = products.category_id ')
+            //     ->where('categories.category_status', 'Active')
+            //     ->get()
+            //     ->getResultArray(),
+            'title' => 'Products',
+            'product' => $this->ProductModel->join('categories', 'categories.category_id = products.category_id')->paginate(),
+            'pager' => $this->ProductModel->pager,
+            'nomor' => ($nomor - 1) * $paginate
         ];
+
         return view('products/index', $data);
     }
 
@@ -47,6 +59,7 @@ class Product extends BaseController
             return redirect()->to('product/create')->withInput();
         }
 
+        // masih error disini
         $fileImage = $this->request->getFile('product_image');
         if ($fileImage->getError() == 4) {
             $namaImage = 'default-150x150.png';
@@ -85,13 +98,14 @@ class Product extends BaseController
 
     public function update($id)
     {
-
         if (!$this->validate($this->ProductModel->getValidationRules())) {
+
             return redirect()->to('product/edit/' . $id)->withInput();
         }
-        $fileImage = $this->request->getFile('product_image');
+
 
         // cek gambar apakah nggak berubah
+        $fileImage = $this->request->getFile('product_image');
         if ($fileImage->getError() == 4) {
             $namaImage = $this->request->getVar('gambar_lama');
         } {
