@@ -5,8 +5,6 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\CategoriesModel;
 use App\Models\ProductModel;
-use CodeIgniter\Validation\Validation;
-use Config\Validation as ConfigValidation;
 
 class Product extends BaseController
 {
@@ -21,22 +19,36 @@ class Product extends BaseController
 
     public function index()
     {
+        // pagination
         $paginate = 5;
         $nomor = $this->request->getGet('page_product');
         if ($nomor = null) {
             $nomor = 1;
         }
 
+        // search data
+        $keyword = $this->request->getGet('keyword');
+        $category = $this->request->getGet('category');
+
+        $where = [];
+        $like = [];
+        $orLike = [];
+
+        if ($category) {
+            $where = ['categories.category_id' => $category];
+        }
+        if($keyword){
+            $like=['']
+        }
         $data = [
-            // 'product' => $this->ProductModel->table('products')
-            //     ->join('categories', 'categories.category_id = products.category_id ')
-            //     ->where('categories.category_status', 'Active')
-            //     ->get()
-            //     ->getResultArray(),
             'title' => 'Products',
-            'product' => $this->ProductModel->join('categories', 'categories.category_id = products.category_id')->paginate(),
+            'categories' => $this->ProductModel->where('categories.category_status' == 'active')->findAll(),
+            'product' => $this->ProductModel->join('categories', 'categories.category_id = products.category_id')->where($where)->like($like)->orLike($orLike)
+                ->paginate($paginate),
             'pager' => $this->ProductModel->pager,
-            'nomor' => ($nomor - 1) * $paginate
+            'nomor' => ($nomor - 1) * $paginate,
+            'category' => $category,
+            'keyword' => $keyword
         ];
 
         return view('products/index', $data);
@@ -99,16 +111,14 @@ class Product extends BaseController
     public function update($id)
     {
         if (!$this->validate($this->ProductModel->getValidationRules())) {
-
             return redirect()->to('product/edit/' . $id)->withInput();
         }
-
 
         // cek gambar apakah nggak berubah
         $fileImage = $this->request->getFile('product_image');
         if ($fileImage->getError() == 4) {
             $namaImage = $this->request->getVar('gambar_lama');
-        } {
+        } else {
             $namaImage = $fileImage->getName();
             $fileImage->move('img', $namaImage);
             // hapus file lama
@@ -145,5 +155,14 @@ class Product extends BaseController
             session()->setFlashdata('warning', 'Deleted category Succesfully');
             return redirect()->to(base_url('product'));
         }
+    }
+
+    public function show($id)
+    {
+        $data = [
+            'title' => 'Show Product',
+            'product' => $this->ProductModel->join('categories', 'categories.category_id = products.category_id')->find($id)
+        ];
+        return view('products/show', $data);
     }
 }
