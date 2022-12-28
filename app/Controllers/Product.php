@@ -45,11 +45,11 @@ class Product extends BaseController
             ];
         }
 
-        $categories = $this->ProductModel->where('categories.category_status' == 'active')->findAll();
+        $categories =  $this->CategoriesModel->where('category_status', 'Active')->get()->getResultArray();
+
         $data = [
             'title' => 'Products',
-            // 'categories' => ['' => 'Pilih Category'] + array_column($categories, 'category_name', 'category_id'),
-            'categories' => $this->ProductModel->where('categories.category_status' == 'active')->findAll(),
+            'categories' => ['' => 'Pilih Category'] + array_column($categories, 'category_name', 'category_id'),
             'product' => $this->ProductModel->join('categories', 'categories.category_id = products.category_id')->where($where)->like($like)->orLike($orLike)->paginate($paginate),
             'pager' => $this->ProductModel->pager,
             'nomor' => ($nomor - 1) * $paginate,

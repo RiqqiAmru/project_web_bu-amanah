@@ -131,6 +131,7 @@
   <script src="<?php echo base_url('plugins'); ?>/jquery/jquery.min.js"></script>
   <script src="<?php echo base_url('plugins'); ?>/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="<?php echo base_url(); ?>/js/adminlte.min.js"></script>
+  <script src="<?php echo base_url(); ?>/js/filter.js"></script>
   <script>
     function previewImg() {
       const gambarUpload = document.querySelector('#gambar-produk');
