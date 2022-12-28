@@ -23,3 +23,9 @@ php spark db:seed AdminSeeder
 ```
 php spark serve
 ```
+
+## Creator
+Muhammad Riqqi Amru
+21.230.0069
+3P52
+[Github/RiqqiAmru](https://github.com/RiqqiAmru/)
