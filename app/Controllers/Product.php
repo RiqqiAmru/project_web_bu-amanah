@@ -37,20 +37,25 @@ class Product extends BaseController
         if ($category) {
             $where = ['categories.category_id' => $category];
         }
-        if($keyword){
-            $like=['']
+        if ($keyword) {
+            $like = ['products.product_name' => $keyword];
+            $orLike = [
+                'products.product_sku' => $keyword,
+                'products.product_description' => $keyword,
+            ];
         }
+
+        $categories = $this->ProductModel->where('categories.category_status' == 'active')->findAll();
         $data = [
             'title' => 'Products',
+            // 'categories' => ['' => 'Pilih Category'] + array_column($categories, 'category_name', 'category_id'),
             'categories' => $this->ProductModel->where('categories.category_status' == 'active')->findAll(),
-            'product' => $this->ProductModel->join('categories', 'categories.category_id = products.category_id')->where($where)->like($like)->orLike($orLike)
-                ->paginate($paginate),
+            'product' => $this->ProductModel->join('categories', 'categories.category_id = products.category_id')->where($where)->like($like)->orLike($orLike)->paginate($paginate),
             'pager' => $this->ProductModel->pager,
             'nomor' => ($nomor - 1) * $paginate,
             'category' => $category,
             'keyword' => $keyword
         ];
-
         return view('products/index', $data);
     }
 
