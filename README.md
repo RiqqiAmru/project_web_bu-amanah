@@ -16,7 +16,8 @@ untuk memenuhi pembelajaran makul Pemrograman WEB 2 STMIK Widya Pratama Pekalong
 - nyalakan migrasi & seed
 ```
 php spark migrate
-php spark db:seed AllSeed
+php spark db:seed AdminSeeder
+
 ``` 
 - nyalakan server
 ```
