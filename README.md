@@ -23,6 +23,10 @@ php spark db:seed AdminSeeder
 ```
 php spark serve
 ```
+## Update Content
+```
+git fetch
+```
 
 ## Creator
 Muhammad Riqqi Amru
