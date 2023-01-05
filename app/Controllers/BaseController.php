@@ -50,4 +50,14 @@ abstract class BaseController extends Controller
         // E.g.: $this->session = \Config\Services::session();
         session();
     }
+
+    // cek login
+    public function cekLogin()
+    {
+        $result = true;
+        if (session()->get('level') != 'Admin' && session()->get('status') != 'active') {
+            $result = false;
+        }
+        return $result;
+    }
 }
